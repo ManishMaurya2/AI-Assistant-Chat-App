@@ -3,7 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import api from '../utils/api';
 import { getToken } from '../utils/auth';
 
-const API_BASE = import.meta.env.VITE_API_URL || '/api';
+let API_BASE = import.meta.env.VITE_API_URL || '/api';
+if (API_BASE.startsWith('http') && !API_BASE.endsWith('/api')) {
+    API_BASE = API_BASE.replace(/\/+$/, '') + '/api';
+}
 
 export const useChat = () => {
     const [messages, setMessages] = useState([]);
