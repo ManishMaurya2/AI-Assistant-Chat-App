@@ -122,7 +122,7 @@ const ChatPage = () => {
             {/* Mobile Sidebar Overlay */}
             {isSidebarOpen && (
                 <div 
-                    className="absolute inset-0 bg-black/60 z-30 md:hidden backdrop-blur-sm"
+                    className="absolute inset-0 bg-black/60 z-30 lg:hidden backdrop-blur-sm"
                     onClick={() => setIsSidebarOpen(false)}
                 />
             )}
@@ -149,7 +149,7 @@ const ChatPage = () => {
                     <div className="flex items-center gap-3 min-w-0">
                         <button 
                             onClick={() => setIsSidebarOpen(true)}
-                            className="md:hidden p-2 -ml-2 text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-colors shrink-0"
+                            className="lg:hidden p-2 -ml-2 text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-colors shrink-0"
                         >
                             <Menu className="w-5 h-5" />
                         </button>

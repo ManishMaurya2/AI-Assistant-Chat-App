@@ -18,7 +18,7 @@ const Sidebar = ({
 
     return (
         <div
-            className={`w-[260px] h-full flex flex-col shrink-0 absolute md:relative z-40 transition-transform duration-300 md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+            className={`w-[280px] h-full flex flex-col shrink-0 absolute lg:relative z-40 transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
             style={{
                 background: '#0a0a0f',
                 borderRight: '1px solid rgba(255,255,255,0.06)',
@@ -40,7 +40,7 @@ const Sidebar = ({
                 </div>
                 <button 
                     onClick={onClose} 
-                    className="md:hidden p-2 text-white/50 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
+                    className="lg:hidden p-2 text-white/50 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
                 >
                     <X className="w-5 h-5" />
                 </button>
