@@ -3,35 +3,47 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, MessageSquare, Trash2, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
+import { X } from 'lucide-react'; // needed for close button
+
 const Sidebar = ({
     sessions,
     activeSessionId,
     onSelectSession,
     onCreateSession,
     onDeleteSession,
+    isOpen,
+    onClose,
 }) => {
     const { user, logout } = useAuth();
 
     return (
         <div
-            className="w-[260px] h-full flex flex-col shrink-0"
+            className={`w-[260px] h-full flex flex-col shrink-0 absolute md:relative z-40 transition-transform duration-300 md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
             style={{
                 background: '#0a0a0f',
                 borderRight: '1px solid rgba(255,255,255,0.06)',
             }}
         >
-            <div className="p-5">
-                <h1
-                    className="text-xl font-bold tracking-tight"
-                    style={{
-                        background: 'linear-gradient(135deg, #a78bfa, #3b82f6)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                    }}
+            <div className="p-5 flex justify-between items-center">
+                <div>
+                    <h1
+                        className="text-xl font-bold tracking-tight"
+                        style={{
+                            background: 'linear-gradient(135deg, #a78bfa, #3b82f6)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                        }}
+                    >
+                        AI Assistant
+                    </h1>
+                    <p className="text-xs text-white/40 mt-1">Powered by Claude</p>
+                </div>
+                <button 
+                    onClick={onClose} 
+                    className="md:hidden p-2 text-white/50 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
                 >
-                    AI Assistant
-                </h1>
-                <p className="text-xs text-white/40 mt-1">Powered by Claude</p>
+                    <X className="w-5 h-5" />
+                </button>
             </div>
 
             <motion.button

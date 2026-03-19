@@ -13,7 +13,7 @@ const TypingIndicator = ({ streamingText }) => {
                 <div className="absolute inset-0 bg-[#7c3aed]/20" />
                 <span className="relative z-10">AI</span>
             </div>
-            <div className="flex flex-col items-start max-w-[72%]">
+            <div className="flex flex-col items-start max-w-[85%] md:max-w-[75%]">
                 <div
                     className="px-4 py-3 text-[14px] text-white/90 w-full"
                     style={{

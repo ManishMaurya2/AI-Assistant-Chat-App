@@ -16,7 +16,7 @@ const MessageBubble = ({ message }) => {
                 animate={{ opacity: 1, x: 0 }}
                 className="flex justify-end mb-6"
             >
-                <div className="flex flex-col items-end max-w-[72%]">
+                <div className="flex flex-col items-end max-w-[85%] md:max-w-[75%]">
                     <div
                         className="px-4 py-3 text-[14px] text-white"
                         style={{
@@ -42,7 +42,7 @@ const MessageBubble = ({ message }) => {
                 <div className="absolute inset-0 bg-[#7c3aed]/20" />
                 <span className="relative z-10">AI</span>
             </div>
-            <div className="flex flex-col items-start max-w-[72%] overflow-hidden">
+            <div className="flex flex-col items-start max-w-[85%] md:max-w-[75%] overflow-hidden">
                 <div
                     className="px-4 py-3 text-[14px] text-[rgba(255,255,255,0.87)] markdown-body w-full overflow-hidden"
                     style={{

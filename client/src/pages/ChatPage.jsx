@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Menu } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import MessageBubble from '../components/MessageBubble';
 import TypingIndicator from '../components/TypingIndicator';
@@ -34,6 +34,7 @@ const ChatPage = () => {
     const [summary, setSummary] = useState('');
     const [isSummarizing, setIsSummarizing] = useState(false);
     const [summaryError, setSummaryError] = useState('');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const messagesEndRef = useRef(null);
 
@@ -48,6 +49,7 @@ const ChatPage = () => {
         loadMessages(id);
         setShowSummary(false);
         setSummary('');
+        setIsSidebarOpen(false);
     };
 
     const handleNewChat = async () => {
@@ -56,6 +58,7 @@ const ChatPage = () => {
             clearMessages();
             setShowSummary(false);
             setSummary('');
+            setIsSidebarOpen(false);
         } catch (e) {
             toast.error('Failed to create new chat');
         }
@@ -115,13 +118,23 @@ const ChatPage = () => {
     const activeSession = sessions.find((s) => s._id === activeSessionId);
 
     return (
-        <div className="flex h-screen w-full bg-[#0f0f13] overflow-hidden">
+        <div className="flex h-screen w-full bg-[#0f0f13] overflow-hidden relative">
+            {/* Mobile Sidebar Overlay */}
+            {isSidebarOpen && (
+                <div 
+                    className="absolute inset-0 bg-black/60 z-30 md:hidden backdrop-blur-sm"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
+
             <Sidebar
                 sessions={sessions}
                 activeSessionId={activeSessionId}
                 onSelectSession={handleSelectSession}
                 onCreateSession={handleNewChat}
                 onDeleteSession={handleDeleteSession}
+                isOpen={isSidebarOpen}
+                onClose={() => setIsSidebarOpen(false)}
             />
 
             <div className="flex-1 flex flex-col h-full min-w-0 relative">
@@ -133,9 +146,17 @@ const ChatPage = () => {
                         borderBottom: '1px solid rgba(255,255,255,0.06)',
                     }}
                 >
-                    <span className="text-[14px] font-medium text-white/80 truncate pr-4">
-                        {activeSession?.title || 'Select a chat'}
-                    </span>
+                    <div className="flex items-center gap-3 min-w-0">
+                        <button 
+                            onClick={() => setIsSidebarOpen(true)}
+                            className="md:hidden p-2 -ml-2 text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-colors shrink-0"
+                        >
+                            <Menu className="w-5 h-5" />
+                        </button>
+                        <span className="text-[14px] font-medium text-white/80 truncate pr-4">
+                            {activeSession?.title || 'Select a chat'}
+                        </span>
+                    </div>
 
                     {activeSessionId && messages.length >= 4 && (
                         <button
