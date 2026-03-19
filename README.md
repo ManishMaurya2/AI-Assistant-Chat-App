@@ -233,6 +233,7 @@ AI Assistant Chat App/
 
 ---
 
+
 ## 🔒 Security
 
 - **Password Hashing** — bcryptjs with salt rounds
