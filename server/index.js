@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(helmet());
 app.use(cors({
-  origin: 'http://localhost:5173'
+  origin: ['http://localhost:5173', 'https://ai-assistant-chat-app-zeta.vercel.app'],
 }));
 app.use(express.json());
 
