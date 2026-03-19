@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import api from '../utils/api';
 import { getToken } from '../utils/auth';
 
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
+
 export const useChat = () => {
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +36,7 @@ export const useChat = () => {
         setStreamingText('');
 
         try {
-            const response = await fetch('/api/chat', {
+            const response = await fetch(`${API_BASE}/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -17,6 +17,9 @@ import { apiLimiter } from './middleware/rateLimiter.js';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Trust proxy is required for rate limiters to work correctly behind Render's load balancer
+app.set('trust proxy', 1);
+
 app.use(helmet());
 app.use(cors({
   origin: ['http://localhost:5173', 'https://ai-assistant-chat-app-zeta.vercel.app'],
