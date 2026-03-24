@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { getToken, getUser, saveToken as saveTokenUtil, removeToken as removeTokenUtil } from '../utils/auth';
+import api from '../utils/api';
+
 
 const AuthContext = createContext(null);
 
@@ -35,6 +37,17 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
     };
 
+    const googleLogin = async (code) => {
+        try {
+            const response = await api.post('/auth/google', { code });
+            login(response.data.token);
+            return response.data;
+        } catch (error) {
+            console.error("Google login failed", error);
+            throw error;
+        }
+    };
+
     const logout = () => {
         removeTokenUtil();
         setToken(null);
@@ -45,7 +58,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, token, isAuthenticated, login, logout, loading }}>
+        <AuthContext.Provider value={{ user, token, isAuthenticated, login, googleLogin, logout, loading }}>
             {!loading && children}
         </AuthContext.Provider>
     );
